@@ -19,6 +19,7 @@
 
 # production
 /build
+/old
 
 # misc
 .DS_Store
@@ -42,7 +43,5 @@ next-env.d.ts
 
 # IDE files
 /.idea/
-
-doc.txt
 
 zippy-bee-*.json
