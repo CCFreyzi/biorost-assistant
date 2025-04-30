@@ -10,7 +10,7 @@ export default function Chat() {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const [faqClicked, setFaqClicked] = useState(false);
 
-    const { status, messages, input, submitMessage, handleInputChange } = useAssistant({
+    const { status, messages, input, submitMessage, handleInputChange, setThreadId } = useAssistant({
         api: '/api/assistant',
     });
 
@@ -21,6 +21,10 @@ export default function Chat() {
     }, [messages]);
 
     const toggleChat = () => setIsOpen(!isOpen);
+
+    const onRestart = () => {
+        setThreadId(undefined);
+    };
 
     const faqs = ['Які типи добрив у вас є?', 'Які продукти використовуються при листовій обробці навесні?', 'Які препарати застосовуються у фазу цвітіння ріпаку?', 'Як підготувати посіви до морозів?'];
 
@@ -48,7 +52,13 @@ export default function Chat() {
     }, [input, faqClicked, submitMessage]);
 
     return (
-        <MathJaxContext>
+        <MathJaxContext
+            config={{
+                tex: {
+                    inlineMath: [['\\(', '\\)']],
+                },
+            }}
+        >
             <div className="fixed bottom-0 left-0 right-0 px-2 pb-2 md:bottom-6 md:right-6 md:left-auto md:px-0 z-50">
                 {!isOpen && (
                     <button onClick={toggleChat} className="fixed md:relative bottom-6 right-6 flex items-center justify-center w-14 h-14 bg-green-600 rounded-full shadow-lg hover:bg-green-700 transition-colors">
@@ -60,9 +70,15 @@ export default function Chat() {
                     <div className="w-full mx-auto max-w-[calc(100%-16px)] md:max-w-none md:w-110 h-[550px] bg-white shadow-xl flex flex-col overflow-hidden rounded-md border border-green-100">
                         <div className="bg-green-700 text-white p-3 flex justify-between items-center">
                             <h2 className="font-semibold">Біорост асистент</h2>
-                            <button onClick={toggleChat} className="text-white hover:text-yellow-300 transition-colors">
-                                <FiX className="text-lg" />
-                            </button>
+
+                            <div className="flex gap-x-4">
+                                <button onClick={onRestart} className="text-white hover:text-yellow-300 transition-colors">
+                                    <FiTrash2 className="text-xl cursor-pointer" />
+                                </button>
+                                <button onClick={toggleChat} className="text-white hover:text-yellow-300 transition-colors">
+                                    <FiX className="text-xl cursor-pointer" />
+                                </button>
+                            </div>
                         </div>
 
                         <div className="flex-1 p-4 overflow-y-auto bg-[#E7F5E9]">
