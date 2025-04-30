@@ -1,11 +1,11 @@
-import Header from "./components/header";
-import Hero from "./components/hero";
+import Header from './components/Header';
+import Hero from './components/hero';
 
 export default function Home() {
-  return (
-    <div >
-      <Header />
-      <Hero />
-    </div>
-  );
+    return (
+        <div>
+            <Header />
+            <Hero />
+        </div>
+    );
 }
