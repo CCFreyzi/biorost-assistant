@@ -1,6 +1,6 @@
 'use client';
 
-import { FiTrash2, FiX } from 'react-icons/fi';
+import { FiRefreshCw, FiX } from 'react-icons/fi';
 import { useFaq } from '@/context/FaqContext';
 
 interface ChatHeaderProps {
@@ -21,7 +21,7 @@ export default function ChatHeader({ onClose }: ChatHeaderProps) {
 
             <div className="flex gap-x-4">
                 <button onClick={onRestart} className="text-white hover:text-yellow-300 transition-colors">
-                    <FiTrash2 className="text-xl cursor-pointer" />
+                    <FiRefreshCw className="text-xl cursor-pointer" />
                 </button>
                 <button onClick={onClose} className="text-white hover:text-yellow-300 transition-colors">
                     <FiX className="text-xl cursor-pointer" />

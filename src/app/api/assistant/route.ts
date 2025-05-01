@@ -45,6 +45,8 @@ export async function POST(req: Request) {
                     switch (toolCall.function.name) {
                         case 'get_all_products': {
                             const products = await sheetsService.readRange();
+                            console.log(products);
+
                             return {
                                 tool_call_id: toolCall.id,
                                 output: JSON.stringify(products),

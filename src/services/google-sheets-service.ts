@@ -27,7 +27,7 @@ export class GoogleSheetsService {
         this.authClientPromise = auth.getClient();
     }
 
-    async readRange(range: string = 'Sheet1!A1:E'): Promise<string[][]> {
+    async readRange(range: string = 'Sheet1'): Promise<string[][]> {
         const spreadsheetId = process.env.GOOGLE_SHEET_ID;
         if (!spreadsheetId) {
             throw new Error('Missing GOOGLE_SHEET_ID in .env');
