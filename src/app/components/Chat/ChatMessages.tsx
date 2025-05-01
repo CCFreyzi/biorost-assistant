@@ -56,7 +56,7 @@ export default function ChatMessages() {
                             const isMath = /\\\(|\\\[|\\begin|\\text|\\frac|=|times/.test(m.content);
 
                             return (
-                                <div key={m.id} className={`mb-3 p-3 rounded-lg ${m.role === 'user' ? 'bg-green-600 text-white ml-auto' : 'bg-white text-green-900 mr-auto border border-green-300'}`}>
+                                <div key={m.id} className={`chat-message mb-3 p-3 rounded-lg ${m.role === 'user' ? 'bg-green-600 text-white ml-auto' : 'bg-white text-green-900 mr-auto border border-green-300'}`}>
                                     <strong className="block text-sm mb-1">{m.role === 'user' ? 'Ви' : 'Асистент'}</strong>
 
                                     {isMath ? (

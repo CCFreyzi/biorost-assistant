@@ -14,7 +14,6 @@
         "dotenv": "^16.5.0",
         "googleapis": "^148.0.0",
         "katex": "^0.16.22",
-        "mathjax-full": "^3.2.2",
         "next": "15.2.5",
         "openai": "^4.93.0",
         "react": "^19.0.0",

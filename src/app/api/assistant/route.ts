@@ -44,8 +44,13 @@ export async function POST(req: Request) {
 
                     switch (toolCall.function.name) {
                         case 'get_all_products': {
-                            const products = await sheetsService.readRange();
-                            console.log(products);
+                            const sheetNames = await sheetsService.getAllSheets();
+                            const products: Record<string, Record<string, string>[]> = {};
+
+                            for (const sheet of sheetNames) {
+                                const data = await sheetsService.readAsObjects(sheet);
+                                products[sheet] = data;
+                            }
 
                             return {
                                 tool_call_id: toolCall.id,
