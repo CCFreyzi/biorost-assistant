@@ -8,10 +8,6 @@ import { useFaq } from '@/context/FaqContext';
 import { useEffect, useRef } from 'react';
 import { useAssistantContext } from '@/context/AssistantContext';
 
-function cleanMessageText(text: string) {
-    return text.trim().replace(/^\n+|\n+$/g, '');
-}
-
 const config = {
     loader: { load: ['[tex]/text'] },
     tex: {
