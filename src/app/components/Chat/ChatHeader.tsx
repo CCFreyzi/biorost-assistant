@@ -2,6 +2,7 @@
 
 import { FiRefreshCw, FiX } from 'react-icons/fi';
 import { useFaq } from '@/context/FaqContext';
+import { useAssistantContext } from '@/context/AssistantContext';
 
 interface ChatHeaderProps {
     onClose: () => void;
@@ -9,10 +10,10 @@ interface ChatHeaderProps {
 
 export default function ChatHeader({ onClose }: ChatHeaderProps) {
     const { setFaqClicked } = useFaq();
-
+    const { resetChat } = useAssistantContext();
     const onRestart = () => {
         setFaqClicked(false);
-        window.location.reload();
+        resetChat();
     };
 
     return (

@@ -1,13 +1,11 @@
 'use client';
 
 import { FiSend, FiTrash2 } from 'react-icons/fi';
-import React, { useRef } from 'react';
+import React from 'react';
 import { useAssistantContext } from '@/context/AssistantContext';
 
 export default function ChatInput() {
-    const { input, status, handleInputChange, submitMessage } = useAssistantContext();
-
-    const formRef = useRef<HTMLFormElement>(null);
+    const { input, status, handleInputChange, submitMessage, formRef } = useAssistantContext();
 
     const clearInput = () => {
         handleInputChange({
