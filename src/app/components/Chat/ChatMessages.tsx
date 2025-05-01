@@ -19,9 +19,8 @@ const faqs = ['Скільки потрібно Біорост «СТАРТ» д�
 
 export default function ChatMessages() {
     const { setFaqClicked } = useFaq();
-    const { messages, status, handleInputChange } = useAssistantContext();
+    const { messages, status, handleInputChange, formRef } = useAssistantContext();
 
-    const formRef = useRef<HTMLFormElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -31,7 +30,10 @@ export default function ChatMessages() {
     const handleFAQClick = (question: string) => {
         handleInputChange({ target: { value: question } } as React.ChangeEvent<HTMLInputElement>);
         setFaqClicked(true);
-        formRef.current?.requestSubmit();
+
+        setTimeout(() => {
+            formRef.current?.requestSubmit();
+        }, 0);
     };
 
     return (
