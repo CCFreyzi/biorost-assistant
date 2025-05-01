@@ -11,13 +11,20 @@ export class GoogleSheetsService {
     private authClientPromise: Promise<any>;
 
     constructor() {
+        const client_email = process.env.GOOGLE_CLIENT_EMAIL;
+        const private_key = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
         const credentialsPath = process.env.GOOGLE_CREDENTIALS_PATH;
-        if (!credentialsPath) {
-            throw new Error('Missing GOOGLE_CREDENTIALS_PATH in .env');
-        }
 
-        const absolutePath = path.resolve(credentialsPath);
-        const credentials = JSON.parse(readFileSync(absolutePath, 'utf8'));
+        let credentials;
+
+        if (client_email && private_key) {
+            credentials = { client_email, private_key };
+        } else if (credentialsPath) {
+            const absolutePath = path.resolve(credentialsPath);
+            credentials = JSON.parse(readFileSync(absolutePath, 'utf8'));
+        } else {
+            throw new Error('Missing GOOGLE_CLIENT_EMAIL/GOOGLE_PRIVATE_KEY or GOOGLE_CREDENTIALS_PATH in .env');
+        }
 
         const auth = new google.auth.GoogleAuth({
             credentials,
@@ -51,9 +58,7 @@ export class GoogleSheetsService {
         const sheets = google.sheets({ version: 'v4', auth: authClient });
 
         const response = await sheets.spreadsheets.get({ spreadsheetId });
-        const sheetTitles = response.data.sheets?.map((sheet) => sheet.properties?.title || '') || [];
-
-        return sheetTitles;
+        return response.data.sheets?.map((sheet) => sheet.properties?.title || '') || [];
     }
 
     async readRange(range: string = 'Sheet1'): Promise<string[][]> {
