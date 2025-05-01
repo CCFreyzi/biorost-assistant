@@ -8,10 +8,6 @@ import { useFaq } from '@/context/FaqContext';
 import { useEffect, useRef } from 'react';
 import { useAssistantContext } from '@/context/AssistantContext';
 
-function cleanMessageText(text: string) {
-    return text.trim().replace(/^\n+|\n+$/g, '');
-}
-
 const config = {
     loader: { load: ['[tex]/text'] },
     tex: {
@@ -19,7 +15,7 @@ const config = {
     },
 };
 
-const faqs = ['Які типи добрив у вас є?', 'Які продукти використовуються при листовій обробці навесні?', 'Які препарати застосовуються у фазу цвітіння ріпаку?', 'Як підготувати посіви до морозів?'];
+const faqs = ['Скільки потрібно Біорост «СТАРТ» для 15 га озимої пшениці навесні?', 'Скільки літрів Біорост «СТАРТ» потрібно для обробки 10 гектарів ріпаку?', 'Чим корисні використання продуктів Біорост  при обробці по листу навесні?', 'Скільки коштує обробка 10 соток препаратом Біорост ІМУНІТЕТ КВІТИ?'];
 
 export default function ChatMessages() {
     const { setFaqClicked } = useFaq();
