@@ -7,6 +7,7 @@ import rehypeKatex from 'rehype-katex';
 import { useFaq } from '@/context/FaqContext';
 import { useEffect, useRef } from 'react';
 import { useAssistantContext } from '@/context/AssistantContext';
+import { FaSpinner } from 'react-icons/fa';
 
 const config = {
     loader: { load: ['[tex]/text'] },
@@ -71,8 +72,10 @@ export default function ChatMessages() {
                         })}
 
                         {status === 'in_progress' && (
-                            <div className="text-center py-2">
-                                <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-green-600"></div>
+                            <div className="text-center py-2 flex flex-col gap-y-2 items-center justify-center">
+                                {/* <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-green-600"></div> */}
+                                <FaSpinner className="inline-block animate-spin text-green-600 text-4xl" />
+
                             </div>
                         )}
                     </>
